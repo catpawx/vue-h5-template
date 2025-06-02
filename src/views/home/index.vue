@@ -12,7 +12,6 @@
 
 <script setup lang="ts">
 import { useDemoStore } from "@/store/modules/demo";
-import { onActivated, onMounted } from "vue";
 const demoStore = useDemoStore();
 
 onMounted(() => {
