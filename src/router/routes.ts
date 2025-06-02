@@ -25,6 +25,15 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
       {
+        path: "user",
+        name: "User",
+        component: () => import("@/views/user/index.vue"),
+        meta: {
+          title: "我的",
+          noCache: true,
+        },
+      },
+      {
         path: "about",
         name: "About",
         component: () => import("@/views/about/index.vue"),

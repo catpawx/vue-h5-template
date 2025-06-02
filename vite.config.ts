@@ -21,6 +21,7 @@ export default defineConfig(({ mode }) => {
           /\.md$/, // .md
         ],
         imports: ["vue", "vue-router"],
+        dirs: ["src/hooks"],
         dts: "src/types/auto-imports.d.ts",
         resolvers: [VantResolver()],
       }),
