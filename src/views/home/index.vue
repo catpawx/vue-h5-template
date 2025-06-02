@@ -1,5 +1,5 @@
 <template>
-  <div>home</div>
+  <div class="wrapper">home</div>
   <RouterLink to="/tools">Go to Tools</RouterLink>
   <div>{{ demoStore.count }}</div>
   <div>{{ demoStore.doubleCount }}</div>
@@ -8,6 +8,7 @@
   <van-button type="primary" @click="showToastStub">
     show vant toast
   </van-button>
+  <div class="w-[50vw]">unocss</div>
 </template>
 
 <script setup lang="ts">
@@ -25,3 +26,11 @@ const showToastStub = () => {
   showToast("No need to import showToast");
 };
 </script>
+
+<style scoped>
+.wrapper {
+  width: 750px;
+  height: 200px;
+  background-color: red;
+}
+</style>

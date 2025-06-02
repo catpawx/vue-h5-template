@@ -4,6 +4,7 @@ import path from "path";
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import { VantResolver } from "@vant/auto-import-resolver";
+import UnoCSS from "unocss/vite";
 
 // https://vite.dev/config/
 
@@ -11,6 +12,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       vue(),
+      UnoCSS(),
       AutoImport({
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx

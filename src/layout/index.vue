@@ -24,7 +24,7 @@
   </div>
 </template>
 
-<!-- <style lang="less" scoped>
+<style lang="less" scoped>
 @import "@/styles/mixin.less";
 
 .app-wrapper {
@@ -33,4 +33,4 @@
   height: 100%;
   width: 100%;
 }
-</style> -->
+</style>
