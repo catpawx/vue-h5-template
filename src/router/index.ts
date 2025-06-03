@@ -1,12 +1,8 @@
-import {
-  createRouter,
-  createWebHashHistory,
-  type RouteLocationNormalized,
-} from "vue-router";
+import { createRouter, createWebHashHistory, type RouteLocationNormalized } from "vue-router";
 import routes from "./routes";
 import { useCachedViewStoreHook } from "@/store/modules/cached-view";
 import NProgress from "@/utils/progress";
-import setPageTitle from "@/utils/set-page-title";
+import { useTitle } from "@/hooks/useTitle";
 
 const router = createRouter({
   history: createWebHashHistory(),
@@ -25,7 +21,7 @@ router.beforeEach((to: toRouteType, from, next) => {
   // 路由缓存
   useCachedViewStoreHook().addCachedView(to);
   // 页面 title
-  setPageTitle(to.meta.title);
+  useTitle(to?.meta?.title as string);
   next();
 });
 
