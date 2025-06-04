@@ -3,7 +3,6 @@ import { isString } from "@/utils/is";
 
 export const useTitle = (newTitle?: string) => {
   const appTitle = import.meta.env.VITE_APP_TITLE;
-  console.log("appTitle", import.meta.env);
 
   const title = ref(newTitle ? `${appTitle} - ${newTitle}` : appTitle);
 

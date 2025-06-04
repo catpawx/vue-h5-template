@@ -5,7 +5,6 @@ import axios, {
   type InternalAxiosRequestConfig,
 } from "axios";
 
-import { showConfirmDialog, showToast } from "vant";
 import qs from "qs";
 import { config } from "@/config/axios/config";
 import {

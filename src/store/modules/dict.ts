@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { store } from "../index";
-import type { DictTypeVO } from "@/api/system/dict/dict.type";
+import type { DictDataVO } from "@/api/system/dict/dict.data";
 import { CACHE_KEY, useCache } from "@/hooks/useCache";
 const { wsCache } = useCache("sessionStorage");
 import { getSimpleDictDataList } from "@/api/system/dict/dict.data";
@@ -16,13 +16,13 @@ export interface DictTypeType {
   dictValue: DictValueType[];
 }
 export interface DictState {
-  dictMap: Map<string, any>;
+  dictMap: Record<string, any>;
   isSetDict: boolean;
 }
 
 export const useDictStore = defineStore("dict", {
   state: (): DictState => ({
-    dictMap: new Map<string, any>(),
+    dictMap: {},
     isSetDict: false,
   }),
   getters: {
@@ -46,8 +46,8 @@ export const useDictStore = defineStore("dict", {
       } else {
         const res = await getSimpleDictDataList();
         // 设置数据
-        const dictDataMap = new Map<string, any>();
-        res.forEach((dictData: DictTypeVO) => {
+        const dictDataMap: Record<string, any> = {};
+        res.forEach((dictData: DictDataVO) => {
           // 获得 dictType 层级
           const enumValueObj = dictDataMap[dictData.dictType];
           if (!enumValueObj) {
@@ -76,7 +76,7 @@ export const useDictStore = defineStore("dict", {
       wsCache.delete(CACHE_KEY.DICT_CACHE);
       const res = await getSimpleDictDataList();
       // 设置数据
-      const dictDataMap = new Map<string, any>();
+      const dictDataMap: Record<string, any> = {};
       res.forEach((dictData: DictDataVO) => {
         // 获得 dictType 层级
         const enumValueObj = dictDataMap[dictData.dictType];

@@ -6,29 +6,31 @@
     </div>
 
     <div class="login-form">
-      <van-form @submit="onSubmit">
+      <van-form @submit="handleLogin">
         <van-cell-group inset>
           <van-field
-            v-model="username"
+            v-model="loginData.loginForm.username"
             name="username"
             label="用户名"
             placeholder="请输入用户名"
             :rules="[{ required: true, message: '请输入用户名' }]"
           />
           <van-field
-            v-model="password"
-            :type="showPassword ? 'text' : 'password'"
+            v-model="loginData.loginForm.password"
+            :type="loginData.isShowPassword ? 'text' : 'password'"
             name="password"
             label="密码"
             placeholder="请输入密码"
-            :right-icon="showPassword ? 'eye-o' : 'closed-eye'"
-            @click-right-icon="showPassword = !showPassword"
+            :right-icon="loginData.isShowPassword ? 'eye-o' : 'closed-eye'"
+            @click-right-icon="loginData.isShowPassword = !loginData.isShowPassword"
             :rules="[{ required: true, message: '请输入密码' }]"
           />
         </van-cell-group>
 
         <div style="margin: 16px">
-          <van-button round block type="primary" native-type="submit"> 登录 </van-button>
+          <van-button round block type="primary" native-type="submit" :loading="loginLoading">
+            登录
+          </van-button>
         </div>
       </van-form>
     </div>
@@ -36,15 +38,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { showToast } from "vant";
+import { closeToast, showLoadingToast, showToast } from "vant";
+import * as LoginApi from "@/api/login";
+import * as authUtil from "@/utils/auth";
+import type { RouteLocationNormalizedLoaded } from "vue-router";
+const { currentRoute, push } = useRouter();
+const loginLoading = ref(false);
+const redirect = ref<string>("");
 
 const loginData = reactive({
   isShowPassword: false,
-  captchaEnable: import.meta.env.VITE_APP_CAPTCHA_ENABLE,
   tenantEnable: import.meta.env.VITE_APP_TENANT_ENABLE,
   loginForm: {
-    tenantName: "",
+    tenantName: "飞隆客",
     username: "",
     password: "",
     captchaVerification: "",
@@ -52,9 +58,54 @@ const loginData = reactive({
   },
 });
 
-const onSubmit = (values: any) => {
-  console.log("submit", values);
-  showToast("登录成功");
+watch(
+  () => currentRoute.value,
+  (route: RouteLocationNormalizedLoaded) => {
+    redirect.value = route?.query?.redirect as string;
+  },
+  {
+    immediate: true,
+  }
+);
+
+//获取租户ID
+const getTenantId = async () => {
+  if (loginData.tenantEnable === "true") {
+    const res = await LoginApi.getTenantIdByName(loginData.loginForm.tenantName);
+    authUtil.setTenantId(res);
+  }
+};
+
+// 登录
+const handleLogin = async () => {
+  loginLoading.value = true;
+  try {
+    await getTenantId();
+
+    const res = await LoginApi.login(loginData.loginForm);
+    if (!res) {
+      return;
+    }
+    showLoadingToast({
+      message: "正在加载系统中...",
+    });
+    if (loginData.loginForm.rememberMe) {
+      authUtil.setLoginForm(loginData.loginForm);
+    } else {
+      authUtil.removeLoginForm();
+    }
+    authUtil.setToken(res);
+    if (!redirect.value) {
+      redirect.value = "/";
+    }
+    push({ path: redirect.value });
+  } catch {
+    loginLoading.value = false;
+  } finally {
+    setTimeout(() => {
+      closeToast();
+    }, 400);
+  }
 };
 </script>
 
