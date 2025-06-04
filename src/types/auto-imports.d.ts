@@ -6,12 +6,14 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const CACHE_KEY: typeof import('../hooks/useCache')['CACHE_KEY']
   const EffectScope: typeof import('vue')['EffectScope']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
+  const deleteUserCache: typeof import('../hooks/useCache')['deleteUserCache']
   const effectScope: typeof import('vue')['effectScope']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
@@ -55,6 +57,7 @@ declare global {
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useCache: typeof import('../hooks/useCache')['useCache']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useDarkMode: typeof import('../hooks/useToggleDarkMode')['useDarkMode']

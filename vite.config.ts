@@ -20,7 +20,6 @@ export default defineConfig(({ command, mode }) => {
   } else {
     env = loadEnv(mode, root);
   }
-  console.log("env", env);
   return {
     plugins: [
       vue(),
