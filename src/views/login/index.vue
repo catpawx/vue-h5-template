@@ -1,12 +1,8 @@
 <template>
-  <div class="login-container">
-    <div class="login-header">
-      <h2>欢迎登录</h2>
-      <p class="sub-title">请输入您的账号和密码</p>
-    </div>
-
-    <div class="login-form">
-      <van-form @submit="handleLogin">
+  <div class="h-screen flex flex-col items-center bg-white p-12">
+    <h2 class="text-2xl font-bold mb-12">{{ title }}</h2>
+    <van-form @submit="handleLogin" label-width="50px">
+      <div class="border-1 border-gray-200 border-solid rounded-lg">
         <van-cell-group inset>
           <van-field
             v-model="loginData.loginForm.username"
@@ -26,14 +22,14 @@
             :rules="[{ required: true, message: '请输入密码' }]"
           />
         </van-cell-group>
+      </div>
 
-        <div style="margin: 16px">
-          <van-button round block type="primary" native-type="submit" :loading="loginLoading">
-            登录
-          </van-button>
-        </div>
-      </van-form>
-    </div>
+      <div class="mt-12">
+        <van-button round block type="primary" native-type="submit" :loading="loginLoading">
+          登录
+        </van-button>
+      </div>
+    </van-form>
   </div>
 </template>
 
@@ -45,6 +41,8 @@ import type { RouteLocationNormalizedLoaded } from "vue-router";
 const { currentRoute, push } = useRouter();
 const loginLoading = ref(false);
 const redirect = ref<string>("");
+
+const title = import.meta.env.VITE_APP_TITLE;
 
 const loginData = reactive({
   isShowPassword: false,
