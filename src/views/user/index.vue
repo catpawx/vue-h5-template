@@ -1,7 +1,13 @@
 <template>
-  <div class="h-screen w-screen flex flex-col items-center">
+  <div
+    class="h-screen w-screen flex flex-col items-center"
+    style="background-color: var(--color-background)"
+  >
     <div class="w-screen">
-      <div class="h-200px bg-white flex items-center p-4 mb-4">
+      <div
+        class="h-200px flex items-center p-4 mb-4"
+        style="background-color: var(--color-background-2)"
+      >
         <van-space>
           <van-image
             round
@@ -17,6 +23,7 @@
 
       <van-cell-group>
         <van-cell title="切换主题" :value="mode ? 'light' : 'dark'" @click="toggleDarkMode" />
+        <van-cell title="关于我们" @click="goAbout" />
       </van-cell-group>
     </div>
 
@@ -60,5 +67,9 @@ const loginOut = async () => {
       router.replace("/login");
     });
   } catch {}
+};
+
+const goAbout = () => {
+  router.push("/about");
 };
 </script>

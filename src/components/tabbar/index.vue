@@ -1,5 +1,5 @@
 <template>
-  <van-tabbar v-model="active" :placeholder="true" :route="true" fixed>
+  <van-tabbar v-model="active" :placeholder="true" :route="true" fixed v-if="show">
     <van-tabbar-item
       v-for="(item, index) in tabbarData"
       :key="index"
@@ -13,6 +13,8 @@
 
 <script setup lang="ts">
 import { ref, reactive } from "vue";
+
+const route = useRoute();
 
 const active = ref(0);
 const tabbarData = reactive([
@@ -38,4 +40,6 @@ const tabbarData = reactive([
     },
   },
 ]);
+
+const show = computed(() => route.name && tabbarData.some((item) => item.to.name === route.name));
 </script>

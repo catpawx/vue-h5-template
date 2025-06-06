@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, type RouteLocationNormalized } from "vue-router";
+import { createRouter, createWebHistory, type RouteLocationNormalized } from "vue-router";
 import routes from "./routes";
 import { isRelogin } from "@/config/axios/service";
 import { useCachedViewStoreHook } from "@/store/modules/cached-view";
@@ -9,7 +9,7 @@ import { useDictStoreWithOut } from "@/store/modules/dict";
 import { useUserStoreWithOut } from "@/store/modules/user";
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(import.meta.env.VITE_APP_PUBLIC_PATH),
   routes,
 });
 
@@ -19,15 +19,6 @@ export interface toRouteType extends RouteLocationNormalized {
     noCache?: boolean;
   };
 }
-
-// router.beforeEach((to: toRouteType, from, next) => {
-//   NProgress.start();
-//   // 路由缓存
-//   useCachedViewStoreHook().addCachedView(to);
-//   // 页面 title
-//   useTitle(to?.meta?.title as string);
-//   next();
-// });
 
 const parseURL = (
   url: string | null | undefined
