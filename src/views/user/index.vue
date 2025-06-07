@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="h-screen w-screen flex flex-col items-center"
-    style="background-color: var(--color-background)"
-  >
+  <div class="w-screen flex flex-col items-center">
     <div class="w-screen">
       <div
         class="h-200px flex items-center p-4 mb-4"
@@ -37,7 +34,7 @@
       </van-cell-group>
     </div>
 
-    <div class="bottom-20 fixed">
+    <div class="mt-10">
       <van-button type="primary" @click="loginOut" class="w-[500px]">{{
         t("user.logout")
       }}</van-button>

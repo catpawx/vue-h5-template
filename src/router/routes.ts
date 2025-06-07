@@ -15,6 +15,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "主页",
+          hideNavBar: true,
         },
       },
       {
