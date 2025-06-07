@@ -4,20 +4,44 @@ import "normalize.css/normalize.css";
 import "@/styles/index.less";
 // 引入unocss css
 import "@/plugins/unocss";
+// 初始化多语言
+import { setupI18n } from "@/plugins/vueI18n";
+
+// 引入状态管理
+import { setupStore } from "@/store";
+
+// 路由
+import router, { setupRouter } from "@/router";
 
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
-import { store } from "./store";
 
 import { initializeDarkMode } from "@/utils/dark-mode";
 initializeDarkMode();
 
-const app = createApp(App);
+// 创建实例
+const setupAll = async () => {
+  const app = createApp(App);
 
-// 路由
-app.use(router);
-// store
-app.use(store);
+  await setupI18n(app);
 
-app.mount("#app");
+  setupStore(app);
+
+  setupRouter(app);
+
+  // setupStore(app)
+
+  // setupGlobCom(app)
+
+  // setupElementPlus(app)
+
+  // setupFormCreate(app)
+
+  // setupRouter(app)
+
+  await router.isReady();
+
+  app.mount("#app");
+};
+
+setupAll();

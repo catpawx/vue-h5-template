@@ -1,3 +1,4 @@
+import type { App } from "vue";
 import { createRouter, createWebHistory, type RouteLocationNormalized } from "vue-router";
 import routes from "./routes";
 import { isRelogin } from "@/config/axios/service";
@@ -101,5 +102,9 @@ router.afterEach((to) => {
   useTitle(to?.meta?.title as string);
   NProgress.done();
 });
+
+export const setupRouter = (app: App<Element>) => {
+  app.use(router);
+};
 
 export default router;

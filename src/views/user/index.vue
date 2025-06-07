@@ -22,32 +22,76 @@
       </div>
 
       <van-cell-group>
-        <van-cell title="切换主题" :value="mode ? 'light' : 'dark'" @click="toggleDarkMode" />
-        <van-cell title="关于我们" @click="goAbout" />
+        <van-cell
+          :title="t('user.switchTheme')"
+          :value="mode ? 'light' : 'dark'"
+          @click="toggleDarkMode"
+        />
+        <van-cell :title="t('user.aboutUs')" @click="goAbout" />
+        <van-cell
+          is-link
+          :title="t('setting.language')"
+          :value="currentLocale.name"
+          @click="showLanguagePicker = true"
+        />
       </van-cell-group>
     </div>
 
     <div class="bottom-20 fixed">
-      <van-button type="primary" @click="loginOut" class="w-[500px]">退出登录</van-button>
+      <van-button type="primary" @click="loginOut" class="w-[500px]">{{
+        t("user.logout")
+      }}</van-button>
     </div>
+
+    <van-popup v-model:show="showLanguagePicker" position="bottom">
+      <van-picker
+        v-model="languageValues"
+        :columns="languageColumns"
+        @confirm="onLanguageConfirm"
+        @cancel="showLanguagePicker = false"
+      />
+    </van-popup>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useCachedViewStoreHook } from "@/store/modules/cached-view";
 import { useUserStore } from "@/store/modules/user";
+import { useLocaleStore } from "@/store/modules/locale";
 
-import { useRouter } from "vue-router";
+const { t } = useI18n();
 
 const userStore = useUserStore();
 const cachedViewStore = useCachedViewStoreHook();
 const router = useRouter();
 
-console.log(userStore);
-
 const user = userStore.user;
 
 const mode = useDarkMode();
+
+const localeStore = useLocaleStore();
+
+const currentLocale = localeStore.currentLocale;
+const showLanguagePicker = ref(false);
+const languageValues = ref<string[]>([currentLocale.lang]);
+const languageColumns = ref(
+  localeStore.localeMap.map((item) => {
+    return {
+      text: item.name,
+      value: item.lang,
+    };
+  })
+);
+
+const onLanguageConfirm = (value: { selectedValues: string[] }) => {
+  console.log(event);
+  localeStore.setCurrentLocale({
+    lang: value.selectedValues[0] as LocaleType,
+  });
+  languageValues.value = [value.selectedValues[0]];
+  showLanguagePicker.value = false;
+  window.location.reload();
+};
 
 // 切换主题
 const toggleDarkMode = (event: TouchEvent | MouseEvent) => {
@@ -57,10 +101,8 @@ const toggleDarkMode = (event: TouchEvent | MouseEvent) => {
 const loginOut = async () => {
   try {
     showConfirmDialog({
-      title: "提示",
-      message: "确定退出登录吗？",
-      confirmButtonText: "确定",
-      cancelButtonText: "取消",
+      title: t("common.confirmTitle"),
+      message: t("common.loginOutMessage"),
     }).then(async () => {
       await userStore.loginOut();
       cachedViewStore.delAllCachedViews();
