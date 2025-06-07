@@ -1,4 +1,11 @@
 export default {
+  router: {
+    login: "登录",
+    home: "首页",
+    tools: "工具",
+    user: "我的",
+    about: "关于",
+  },
   common: {
     inputText: "请输入",
     selectText: "请选择",
@@ -153,13 +160,6 @@ export default {
     point: "请依次点击",
     success: "验证成功",
     fail: "验证失败",
-  },
-  router: {
-    login: "登录",
-    socialLogin: "社交登录",
-    home: "首页",
-    analysis: "分析页",
-    workplace: "工作台",
   },
 
   action: {

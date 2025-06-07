@@ -3,6 +3,8 @@ import type { RouteRecordRaw } from "vue-router";
 // 定义导航栏和标签栏可见的路由白名单
 export const routeWhiteList: readonly string[] = ["Home", "Tools", "User", "Login"];
 
+const { t } = useI18n();
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -15,6 +17,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/home/index.vue"),
         meta: {
           title: "主页",
+          i18n: "router.home",
           hideNavBar: true,
         },
       },
@@ -24,6 +27,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/tools/index.vue"),
         meta: {
           title: "工具",
+          i18n: "router.tools",
         },
       },
       {
@@ -32,6 +36,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/user/index.vue"),
         meta: {
           title: "我的",
+          i18n: "router.user",
           noCache: true,
         },
       },
@@ -41,6 +46,7 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import("@/views/about/index.vue"),
         meta: {
           title: "关于",
+          i18n: "router.about",
           noCache: true,
         },
       },
@@ -48,6 +54,11 @@ const routes: Array<RouteRecordRaw> = [
         path: "login",
         name: "Login",
         component: () => import("@/views/login/index.vue"),
+        meta: {
+          title: "登录",
+          i18n: "router.login",
+          noCache: true,
+        },
       },
     ],
   },

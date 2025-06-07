@@ -16,26 +16,26 @@ import { routeWhiteList } from "@/router/routes";
 import { ref, reactive } from "vue";
 
 const route = useRoute();
-
+const { t } = useI18n();
 const active = ref(0);
 const tabbarData = reactive([
   {
     icon: "wap-home-o",
-    title: "主页",
+    title: t("router.home"),
     to: {
       name: "Home",
     },
   },
   {
     icon: "gem-o",
-    title: "工具",
+    title: t("router.tools"),
     to: {
       name: "Tools",
     },
   },
   {
     icon: "user-o",
-    title: "我的",
+    title: t("router.user"),
     to: {
       name: "User",
     },

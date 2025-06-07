@@ -1,4 +1,11 @@
 export default {
+  router: {
+    login: "Login",
+    home: "Home",
+    tools: "Tools",
+    user: "User",
+    about: "About",
+  },
   common: {
     inputText: "Please input",
     selectText: "Please select",
@@ -146,19 +153,7 @@ export default {
     resetPasswordSuccess: "Reset Password Success",
     invalidTenantName: "Invalid Tenant Name",
   },
-  captcha: {
-    verification: "Please complete security verification",
-    slide: "Swipe right to complete verification",
-    point: "Please click",
-    success: "Verification succeeded",
-    fail: "verification failed",
-  },
-  router: {
-    login: "Login",
-    home: "Home",
-    analysis: "Analysis",
-    workplace: "Workplace",
-  },
+
   action: {
     create: "Create",
     add: "Add",
