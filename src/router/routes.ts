@@ -1,5 +1,8 @@
 import type { RouteRecordRaw } from "vue-router";
 
+// 定义导航栏和标签栏可见的路由白名单
+export const routeWhiteList: readonly string[] = ["Home", "Tools", "User", "Login"];
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
