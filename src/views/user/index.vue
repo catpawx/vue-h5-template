@@ -24,10 +24,10 @@
           :value="mode ? 'light' : 'dark'"
           @click="toggleDarkMode"
         />
-        <van-cell :title="t('user.aboutUs')" @click="goAbout" />
+        <van-cell is-link :title="t('user.aboutUs')" @click="goAbout" />
         <van-cell
           is-link
-          :title="t('setting.language')"
+          :title="t('common.language')"
           :value="currentLocale.name"
           @click="showLanguagePicker = true"
         />
