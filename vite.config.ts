@@ -6,6 +6,7 @@ import Components from "unplugin-vue-components/vite";
 import { VantResolver } from "@vant/auto-import-resolver";
 import UnoCSS from "unocss/vite";
 import { loadEnv } from "vite";
+import { createHtmlPlugin } from "vite-plugin-html";
 
 // 当前执行node命令时文件夹的地址(工作目录)
 const root = process.cwd();
@@ -39,6 +40,14 @@ export default defineConfig(({ command, mode }) => {
       Components({
         dts: "src/types/components.d.ts",
         resolvers: [VantResolver()],
+      }),
+      // 注入模板数据
+      createHtmlPlugin({
+        inject: {
+          data: {
+            ENABLE_ERUDA: env.VITE_ENABLE_ERUDA || false,
+          },
+        },
       }),
     ],
     resolve: {
