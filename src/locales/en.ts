@@ -8,6 +8,8 @@ export default {
   },
   common: {
     language: "Language",
+    notFound: "Page not found",
+    back: "Back",
   },
   user: {
     switchTheme: "Switch Theme",

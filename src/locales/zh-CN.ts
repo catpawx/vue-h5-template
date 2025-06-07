@@ -8,6 +8,8 @@ export default {
   },
   common: {
     language: "语言",
+    notFound: "页面不存在",
+    back: "返回",
   },
   user: {
     switchTheme: "切换主题",

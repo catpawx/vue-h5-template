@@ -3,8 +3,6 @@ import type { RouteRecordRaw } from "vue-router";
 // 定义导航栏和标签栏可见的路由白名单
 export const routeWhiteList: readonly string[] = ["Home", "Tools", "User", "Login"];
 
-const { t } = useI18n();
-
 const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
@@ -61,6 +59,16 @@ const routes: Array<RouteRecordRaw> = [
         },
       },
     ],
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "404",
+    component: () => import("@/views/404.vue"),
+    meta: {
+      title: "404",
+      noCache: true,
+      hideNavBar: true,
+    },
   },
 ];
 
