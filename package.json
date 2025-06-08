@@ -29,8 +29,11 @@
     "web-storage-cache": "^1.1.1"
   },
   "devDependencies": {
+    "@iconify/json": "^2.2.346",
     "@types/node": "^22.15.23",
     "@types/nprogress": "^0.2.3",
+    "@unocss/preset-icons": "^66.1.4",
+    "@unocss/preset-wind4": "^66.1.4",
     "@vant/auto-import-resolver": "^1.3.0",
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
@@ -42,6 +45,7 @@
     "unplugin-vue-components": "^28.7.0",
     "vite": "^6.3.5",
     "vite-plugin-html": "^3.2.2",
+    "vite-plugin-svg-icons": "^2.0.1",
     "vue-tsc": "^2.2.8"
   }
 }

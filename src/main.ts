@@ -4,6 +4,8 @@ import "normalize.css/normalize.css";
 import "@/styles/index.less";
 // 引入unocss css
 import "@/plugins/unocss";
+// svg icon
+import "virtual:svg-icons-register";
 // 初始化多语言
 import { setupI18n } from "@/plugins/vueI18n";
 

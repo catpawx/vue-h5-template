@@ -7,6 +7,9 @@ import { VantResolver } from "@vant/auto-import-resolver";
 import UnoCSS from "unocss/vite";
 import { loadEnv } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
+import { presetIcons } from "unocss/preset-icons";
+import presetWind4 from "@unocss/preset-wind4";
+import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 
 // 当前执行node命令时文件夹的地址(工作目录)
 const root = process.cwd();
@@ -24,7 +27,25 @@ export default defineConfig(({ command, mode }) => {
   return {
     plugins: [
       vue(),
-      UnoCSS(),
+      UnoCSS({
+        presets: [
+          presetWind4,
+          presetIcons({
+            scale: 1.2,
+            extraProperties: {
+              display: "inline-block",
+              "vertical-align": "middle",
+            },
+          }),
+        ],
+      }),
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [path.resolve(root, "src/assets/icons")],
+        // iconDirs: [path.resolve(root, "src/icons/svg")],
+        // 指定symbolId格式
+        symbolId: "icon-[dir]-[name]",
+      }),
       AutoImport({
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
