@@ -1,8 +1,5 @@
 <template>
-  <svg-icon name="github" style="font-size: 24px; color: red" />
-  <Icon name="svg-icon:github" style="font-size: 24px; color: red" />
-  <Icon name="mdi-home" class="text-6xl" style="color: red" />
-  <span class="i-mdi-home" style="font-size: 24px; color: red" />
+  <svg-icon icon="github" style="font-size: 24px; color: red" />
+  <Icon icon="solar:4k-bold" style="font-size: 24px; color: red" />
+  <span class="i-solar:4k-bold" style="font-size: 24px; color: blue" />
 </template>
-
-<script setup></script>

@@ -3,16 +3,16 @@ import { isExternal } from "@/utils/validate";
 import { computed } from "vue";
 
 interface Props {
-  name: string;
+  icon: string;
   className?: string;
 }
 const props = withDefaults(defineProps<Props>(), {
-  name: "",
+  icon: "",
   className: "",
 });
 
-const isExternalIcon = computed(() => isExternal(props.name));
-const iconName = computed(() => `#icon-${props.name}`);
+const isExternalIcon = computed(() => isExternal(props.icon));
+const iconName = computed(() => `#icon-${props.icon}`);
 const svgClass = computed(() => {
   if (props.className) {
     return "svg-icon " + props.className;
@@ -23,8 +23,8 @@ const svgClass = computed(() => {
 // 外链 icon
 const styleExternalIcon = computed(() => {
   return {
-    mask: `url(${props.name}) no-repeat 50% 50%`,
-    "-webkit-mask": `url(${props.name}) no-repeat 50% 50%`,
+    mask: `url(${props.icon}) no-repeat 50% 50%`,
+    "-webkit-mask": `url(${props.icon}) no-repeat 50% 50%`,
   };
 });
 </script>
